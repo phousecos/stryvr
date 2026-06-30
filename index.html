@@ -1,0 +1,466 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Stryvr — Workforce readiness, your brand, lasting engagement</title>
+<meta name="description" content="Stryvr is a workforce learning platform: thousands of courses organized into subject-based pathways, your board's own branded portal, and a mobile app that keeps graduates engaged long after placement. Back end fully managed." />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@500;600;700;800&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@500;600&display=swap" rel="stylesheet" />
+<style>
+  :root {
+    --ink: #11162A;
+    --ink-2: #1A2240;
+    --ink-3: #283050;
+    --panel: #1E2748;
+    --paper: #F3F5FB;
+    --card: #FFFFFF;
+    --text: #11162A;
+    --text-inv: #E9EDF8;
+    --muted: #5C6783;
+    --muted-inv: #9AA6C6;
+    --line: #E2E6F0;
+    --line-inv: #2C3760;
+    --accent: #F4A23B;
+    --accent-deep: #E08522;
+    --accent-soft: #FCEBD2;
+    --indigo: #3B53C9;
+    --radius: 14px;
+    --maxw: 1140px;
+  }
+
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+
+  body {
+    margin: 0;
+    font-family: 'Inter', system-ui, sans-serif;
+    color: var(--text);
+    background: var(--paper);
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  h1, h2, h3 { font-family: 'Sora', system-ui, sans-serif; margin: 0; line-height: 1.08; letter-spacing: -0.02em; }
+  p { margin: 0; }
+  a { color: inherit; text-decoration: none; }
+
+  .wrap { width: 100%; max-width: var(--maxw); margin: 0 auto; padding: 0 24px; }
+
+  .eyebrow {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--accent-deep);
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .eyebrow::before {
+    content: "";
+    width: 22px; height: 2px;
+    background: var(--accent);
+    display: inline-block;
+  }
+  section.dark .eyebrow { color: var(--accent); }
+
+  /* Buttons */
+  .btn {
+    display: inline-flex; align-items: center; gap: 9px;
+    font-family: 'Sora', sans-serif; font-weight: 600; font-size: 15px;
+    padding: 13px 22px; border-radius: 10px; cursor: pointer; border: 1px solid transparent;
+    transition: transform .15s ease, background .15s ease, box-shadow .15s ease;
+  }
+  .btn-primary { background: var(--accent); color: #2A1B05; box-shadow: 0 6px 18px rgba(224,133,34,.28); }
+  .btn-primary:hover { background: var(--accent-deep); transform: translateY(-1px); }
+  .btn-ghost { background: transparent; color: var(--text); border-color: var(--line); }
+  .btn-ghost:hover { border-color: var(--muted); }
+  section.dark .btn-ghost { color: var(--text-inv); border-color: var(--line-inv); }
+  section.dark .btn-ghost:hover { border-color: var(--muted-inv); }
+  .btn .arrow { transition: transform .15s ease; }
+  .btn:hover .arrow { transform: translateX(3px); }
+
+  a:focus-visible, .btn:focus-visible {
+    outline: 3px solid var(--indigo); outline-offset: 3px; border-radius: 8px;
+  }
+
+  /* Nav */
+  header.nav {
+    position: sticky; top: 0; z-index: 50;
+    background: rgba(243,245,251,.82);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid var(--line);
+  }
+  .nav-inner { display: flex; align-items: center; justify-content: space-between; height: 68px; }
+  .brand { display: flex; align-items: center; gap: 10px; font-family: 'Sora', sans-serif; font-weight: 800; font-size: 21px; letter-spacing: -0.03em; }
+  .brand .mark { width: 26px; height: 26px; }
+  .nav-links { display: flex; gap: 30px; align-items: center; }
+  .nav-links a { font-size: 14.5px; font-weight: 500; color: var(--muted); }
+  .nav-links a:hover { color: var(--text); }
+  .nav-cta { display: flex; align-items: center; gap: 14px; }
+
+  @media (max-width: 860px) {
+    .nav-links { display: none; }
+  }
+
+  /* Hero */
+  .hero { position: relative; overflow: hidden; padding: 92px 0 0; }
+  .hero-grid { display: grid; grid-template-columns: 1.15fr .85fr; gap: 40px; align-items: center; }
+  .hero h1 { font-size: clamp(38px, 6vw, 62px); font-weight: 800; }
+  .hero h1 .em { color: var(--accent-deep); }
+  .hero .lead { font-size: clamp(17px, 2.1vw, 20px); color: var(--muted); margin-top: 22px; max-width: 38ch; }
+  .hero-actions { display: flex; gap: 14px; margin-top: 32px; flex-wrap: wrap; }
+
+  .hero-art { position: relative; min-height: 320px; }
+  .hero-art svg { width: 100%; height: auto; display: block; }
+
+  .stat-strip {
+    display: grid; grid-template-columns: repeat(4, 1fr);
+    border-top: 1px solid var(--line);
+    margin-top: 70px;
+  }
+  .stat { padding: 26px 4px 30px; }
+  .stat .n { font-family: 'Sora', sans-serif; font-weight: 700; font-size: 26px; letter-spacing: -0.02em; }
+  .stat .l { font-family: 'JetBrains Mono', monospace; font-size: 11.5px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); margin-top: 6px; }
+
+  @media (max-width: 860px) {
+    .hero-grid { grid-template-columns: 1fr; }
+    .hero-art { order: -1; min-height: 200px; max-width: 420px; }
+    .stat-strip { grid-template-columns: repeat(2, 1fr); }
+    .stat { border-top: 1px solid var(--line); }
+  }
+
+  /* Generic section */
+  section { padding: 92px 0; }
+  .section-head { max-width: 640px; margin-bottom: 48px; }
+  .section-head h2 { font-size: clamp(28px, 4vw, 42px); font-weight: 700; margin-top: 16px; }
+  .section-head p { color: var(--muted); font-size: 17.5px; margin-top: 16px; }
+  section.dark { background: var(--ink); color: var(--text-inv); }
+  section.dark .section-head p { color: var(--muted-inv); }
+
+  /* Two-problem cards */
+  .two-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 22px; }
+  .pcard {
+    background: var(--card); border: 1px solid var(--line); border-radius: var(--radius);
+    padding: 32px; position: relative;
+  }
+  .pcard .num { font-family: 'JetBrains Mono', monospace; font-size: 12.5px; color: var(--accent-deep); font-weight: 600; letter-spacing: .1em; }
+  .pcard h3 { font-size: 21px; font-weight: 600; margin: 14px 0 12px; }
+  .pcard p { color: var(--muted); font-size: 15.5px; }
+  @media (max-width: 760px) { .two-grid { grid-template-columns: 1fr; } }
+
+  /* Feature list */
+  .feat-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 0; border: 1px solid var(--line-inv); border-radius: var(--radius); overflow: hidden; }
+  .feat {
+    padding: 34px 32px; border-bottom: 1px solid var(--line-inv); border-right: 1px solid var(--line-inv);
+  }
+  .feat:nth-child(2n) { border-right: none; }
+  .feat:nth-last-child(-n+2) { border-bottom: none; }
+  .feat .fi { width: 30px; height: 30px; color: var(--accent); margin-bottom: 16px; }
+  .feat h3 { font-size: 18.5px; font-weight: 600; margin-bottom: 9px; }
+  .feat p { color: var(--muted-inv); font-size: 15px; }
+  @media (max-width: 760px) {
+    .feat-grid { grid-template-columns: 1fr; }
+    .feat { border-right: none !important; }
+    .feat:nth-last-child(1) { border-bottom: none; }
+    .feat:nth-last-child(2) { border-bottom: 1px solid var(--line-inv); }
+  }
+
+  /* Who it's for */
+  .who-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 50px; align-items: center; }
+  .who ul { list-style: none; padding: 0; margin: 24px 0 0; display: grid; gap: 14px; }
+  .who li { display: flex; gap: 13px; align-items: flex-start; font-size: 16px; color: var(--text); }
+  .who li svg { flex: none; width: 20px; height: 20px; color: var(--accent-deep); margin-top: 3px; }
+  .who-aside { background: var(--ink); color: var(--text-inv); border-radius: var(--radius); padding: 38px; }
+  .who-aside .q { font-family: 'Sora', sans-serif; font-size: 22px; font-weight: 600; line-height: 1.35; letter-spacing: -0.01em; }
+  .who-aside .q .hl { color: var(--accent); }
+  .who-aside .src { font-family: 'JetBrains Mono', monospace; font-size: 12px; color: var(--muted-inv); margin-top: 20px; letter-spacing: .05em; }
+  @media (max-width: 860px) { .who-grid { grid-template-columns: 1fr; gap: 32px; } }
+
+  /* Pricing */
+  .price-card {
+    background: var(--card); border: 1px solid var(--line); border-radius: 18px;
+    padding: 44px; display: grid; grid-template-columns: 1fr auto; gap: 32px; align-items: center;
+    box-shadow: 0 18px 50px rgba(17,22,42,.06);
+  }
+  .price-card .amt { font-family: 'Sora', sans-serif; font-weight: 800; font-size: 46px; letter-spacing: -0.03em; }
+  .price-card .amt span { font-size: 18px; font-weight: 600; color: var(--muted); }
+  .price-card .note { color: var(--muted); font-size: 15.5px; margin-top: 10px; max-width: 46ch; }
+  .price-tag { font-family: 'JetBrains Mono', monospace; font-size: 12px; letter-spacing: .12em; text-transform: uppercase; color: var(--accent-deep); }
+  @media (max-width: 760px) { .price-card { grid-template-columns: 1fr; text-align: left; } }
+
+  /* CTA band */
+  .cta-band { background: var(--ink); color: var(--text-inv); text-align: center; }
+  .cta-band h2 { font-size: clamp(28px, 4.5vw, 44px); font-weight: 700; max-width: 18ch; margin: 0 auto; }
+  .cta-band p { color: var(--muted-inv); margin: 18px auto 32px; max-width: 48ch; font-size: 17px; }
+
+  /* Footer */
+  footer { background: var(--ink); color: var(--muted-inv); padding: 54px 0 40px; border-top: 1px solid var(--line-inv); }
+  .foot-top { display: flex; justify-content: space-between; gap: 30px; flex-wrap: wrap; align-items: flex-start; }
+  .foot-brand { display: flex; align-items: center; gap: 10px; font-family: 'Sora', sans-serif; font-weight: 800; font-size: 20px; color: var(--text-inv); letter-spacing: -0.03em; }
+  .foot-tag { margin-top: 12px; font-size: 14px; max-width: 30ch; }
+  .foot-links { display: flex; gap: 40px; flex-wrap: wrap; }
+  .foot-col h4 { font-family: 'JetBrains Mono', monospace; font-size: 11.5px; letter-spacing: .1em; text-transform: uppercase; color: var(--muted-inv); margin: 0 0 14px; font-weight: 600; }
+  .foot-col a, .foot-col span { display: block; font-size: 14.5px; color: var(--text-inv); margin-bottom: 9px; opacity: .82; }
+  .foot-col a:hover { opacity: 1; color: var(--accent); }
+  .foot-legal { margin-top: 42px; padding-top: 22px; border-top: 1px solid var(--line-inv); font-size: 13px; display: flex; justify-content: space-between; gap: 16px; flex-wrap: wrap; }
+
+  /* reveal */
+  .reveal { opacity: 0; transform: translateY(18px); transition: opacity .6s ease, transform .6s ease; }
+  .reveal.in { opacity: 1; transform: none; }
+  @media (prefers-reduced-motion: reduce) { .reveal { opacity: 1; transform: none; transition: none; } }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<header class="nav">
+  <div class="wrap nav-inner">
+    <a href="#top" class="brand" aria-label="Stryvr home">
+      <svg class="mark" viewBox="0 0 32 32" fill="none" aria-hidden="true">
+        <path d="M3 26 L12 17 L19 21 L29 7" stroke="#F4A23B" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+        <circle cx="29" cy="7" r="3" fill="#F4A23B"/>
+        <circle cx="12" cy="17" r="2.4" fill="#11162A"/>
+        <circle cx="19" cy="21" r="2.4" fill="#11162A"/>
+      </svg>
+      Stryvr
+    </a>
+    <nav class="nav-links" aria-label="Primary">
+      <a href="#platform">Platform</a>
+      <a href="#who">Who it serves</a>
+      <a href="#pricing">Pricing</a>
+    </nav>
+    <div class="nav-cta">
+      <a class="btn btn-primary" href="https://cal.com/jerribland/stryvr">Book a demo</a>
+    </div>
+  </div>
+</header>
+
+<!-- HERO -->
+<section class="hero" id="top">
+  <div class="wrap">
+    <div class="hero-grid">
+      <div class="hero-copy">
+        <span class="eyebrow">Workforce readiness platform</span>
+        <h1>Give every client a full path to readiness — and a reason to <span class="em">stay</span>.</h1>
+        <p class="lead">Stryvr gives your board a deep, continually growing catalog organized into subject-based workforce pathways, your own branded portal, and a mobile app that keeps graduates engaged long after placement. The back end is fully managed. You stay focused on people.</p>
+        <div class="hero-actions">
+          <a class="btn btn-primary" href="https://cal.com/jerribland/stryvr">Book a 20-minute demo <span class="arrow">→</span></a>
+          <a class="btn btn-ghost" href="#platform">See what's inside</a>
+        </div>
+      </div>
+      <div class="hero-art" aria-hidden="true">
+        <svg viewBox="0 0 420 340" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <line x1="20" y1="312" x2="404" y2="312" stroke="#E2E6F0" stroke-width="2"/>
+          <g stroke="#E2E6F0" stroke-width="1.4" stroke-dasharray="3 7">
+            <line x1="20" y1="250" x2="404" y2="250"/>
+            <line x1="20" y1="188" x2="404" y2="188"/>
+            <line x1="20" y1="126" x2="404" y2="126"/>
+            <line x1="20" y1="64"  x2="404" y2="64"/>
+          </g>
+          <path id="climb" d="M28 300 C 90 296, 110 250, 150 238 S 220 220, 252 168 S 312 110, 392 52"
+                stroke="#F4A23B" stroke-width="4" stroke-linecap="round" fill="none"/>
+          <circle cx="28"  cy="300" r="6"  fill="#11162A"/>
+          <circle cx="150" cy="238" r="6"  fill="#11162A"/>
+          <circle cx="252" cy="168" r="6"  fill="#11162A"/>
+          <circle cx="392" cy="52"  r="9"  fill="#F4A23B"/>
+          <circle cx="392" cy="52"  r="16" fill="#F4A23B" opacity="0.18"/>
+          <text x="20"  y="284" font-family="'JetBrains Mono', monospace" font-size="11" fill="#5C6783">enroll</text>
+          <text x="142" y="222" font-family="'JetBrains Mono', monospace" font-size="11" fill="#5C6783">learn</text>
+          <text x="244" y="152" font-family="'JetBrains Mono', monospace" font-size="11" fill="#5C6783">place</text>
+          <text x="350" y="40"  font-family="'JetBrains Mono', monospace" font-size="11" fill="#E08522">stay engaged</text>
+        </svg>
+      </div>
+    </div>
+
+    <div class="stat-strip">
+      <div class="stat reveal"><div class="n">10,000+</div><div class="l">Courses, and growing</div></div>
+      <div class="stat reveal"><div class="n">Your brand</div><div class="l">Portal you control</div></div>
+      <div class="stat reveal"><div class="n">Fully managed</div><div class="l">Back end &amp; support</div></div>
+      <div class="stat reveal"><div class="n">From $8,500</div><div class="l">Annual license</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- WHY / TWO PROBLEMS -->
+<section id="why">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <span class="eyebrow">Why Stryvr</span>
+      <h2>Two problems, one platform.</h2>
+      <p>The boards that serve people with real barriers to employment face the same two challenges. Stryvr was built for both.</p>
+    </div>
+    <div class="two-grid">
+      <div class="pcard reveal">
+        <div class="num">01</div>
+        <h3>Readiness is more than job skills</h3>
+        <p>For someone re-entering the workforce, a single skills course rarely closes the gap — and a giant course list is its own kind of dead end. Stryvr organizes thousands of courses into subject-based pathways that span the whole journey: financial literacy, self-care and stability, foundational digital and AI skills, and credential-aligned training. Clients follow a clear path, not an overwhelming menu.</p>
+      </div>
+      <div class="pcard reveal">
+        <div class="num">02</div>
+        <h3>Outcomes you can't report if you lose contact</h3>
+        <p>Your performance numbers depend on reaching participants 6 and 12 months after they exit — and that contact is the hardest thing to keep. Stryvr's mobile app keeps graduates engaged for years, so the line to them stays open when your reporting needs it most.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PLATFORM / FEATURES -->
+<section class="dark" id="platform">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <span class="eyebrow">What's inside</span>
+      <h2>An enterprise platform, on social-sector terms.</h2>
+      <p>You get a learning environment you fully brand and control. Stryvr runs everything behind it.</p>
+    </div>
+    <div class="feat-grid">
+      <div class="feat reveal">
+        <svg class="fi" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="14" rx="2"/><path d="M3 9h18M8 18v3M16 18v3"/></svg>
+        <h3>Your own branded portal</h3>
+        <p>Customize the front end with your board's identity, programs, and pathways. Clients see your brand — not ours.</p>
+      </div>
+      <div class="feat reveal">
+        <svg class="fi" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 6h16M4 12h16M4 18h10"/></svg>
+        <h3>Courses organized into pathways</h3>
+        <p>Thousands of courses — from financial literacy and personal stability to digital fundamentals, AI, and workforce credentials — grouped into subject-based pathways, with the catalog expanding continuously.</p>
+      </div>
+      <div class="feat reveal">
+        <svg class="fi" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="7" y="2" width="10" height="20" rx="2.5"/><path d="M11 18h2"/></svg>
+        <h3>A mobile app that keeps people engaged</h3>
+        <p>Graduates stay connected long after placement — sustaining momentum and giving you a living channel back to them for follow-up.</p>
+      </div>
+      <div class="feat reveal">
+        <svg class="fi" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l8 4v5c0 5-3.5 8-8 9-4.5-1-8-4-8-9V7l8-4z"/><path d="M9 12l2 2 4-4"/></svg>
+        <h3>Back end fully managed</h3>
+        <p>Hosting, content updates, and end-user support are handled for you on an enterprise-grade platform. No infrastructure for your team to run.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- WHO IT SERVES -->
+<section id="who">
+  <div class="wrap">
+    <div class="who-grid">
+      <div class="who reveal">
+        <span class="eyebrow">Who it serves</span>
+        <h2 style="font-family:'Sora';font-size:clamp(28px,4vw,40px);font-weight:700;margin-top:16px;letter-spacing:-0.02em;">Built for the clients who are hardest to reach.</h2>
+        <p style="color:var(--muted);font-size:17px;margin-top:16px;">Stryvr is made for workforce boards and the people they serve when the path back to work is steepest:</p>
+        <ul>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg> Returning citizens rebuilding after incarceration</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg> People re-entering the workforce after time away</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg> Clients facing barriers that have kept work out of reach</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg> Anyone who needs stability and skills, not just a job board</li>
+        </ul>
+      </div>
+      <div class="who-aside reveal">
+        <p class="q">“The hardest part isn't getting someone ready. It's <span class="hl">staying with them</span> long enough to prove it worked.”</p>
+        <p class="src">— What workforce boards tell us</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PRICING -->
+<section id="pricing" style="background:var(--paper);">
+  <div class="wrap">
+    <div class="section-head reveal" style="margin-bottom:32px;">
+      <span class="eyebrow">Pricing</span>
+      <h2>Priced for your mission, not enterprise budgets.</h2>
+    </div>
+    <div class="price-card reveal">
+      <div>
+        <span class="price-tag">Annual license</span>
+        <div class="amt" style="margin-top:8px;">$8,500<span> / year to start</span></div>
+        <p class="note">Stryvr is licensed for organizations serving at-risk and barrier-impacted populations — so the cost scales with the people you reach, not with corporate pricing. Final pricing depends on your size and configuration.</p>
+      </div>
+      <div>
+        <a class="btn btn-primary" href="https://cal.com/jerribland/stryvr">Book a demo <span class="arrow">→</span></a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA BAND -->
+<section class="cta-band" id="demo">
+  <div class="wrap">
+    <h2 class="reveal">See Stryvr with your board's name on it.</h2>
+    <p class="reveal">A 20-minute demo walks through the pathways, the mobile app, and a portal mocked up for your board. You decide if it fits the people you serve.</p>
+    <div class="reveal" style="display:flex;gap:14px;justify-content:center;flex-wrap:wrap;">
+      <a class="btn btn-primary" href="https://cal.com/jerribland/stryvr">Book a demo <span class="arrow">→</span></a>
+      <a class="btn btn-ghost" href="tel:+19843882156">Call 984.388.2156</a>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="wrap">
+    <div class="foot-top">
+      <div>
+        <div class="foot-brand">
+          <svg class="mark" width="24" height="24" viewBox="0 0 32 32" fill="none" aria-hidden="true">
+            <path d="M3 26 L12 17 L19 21 L29 7" stroke="#F4A23B" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+            <circle cx="29" cy="7" r="3" fill="#F4A23B"/>
+          </svg>
+          Stryvr
+        </div>
+        <p class="foot-tag">Workforce readiness, your brand, and engagement that lasts.</p>
+      </div>
+      <div class="foot-links">
+        <div class="foot-col">
+          <h4>Platform</h4>
+          <a href="#platform">What's inside</a>
+          <a href="#who">Who it serves</a>
+          <a href="#pricing">Pricing</a>
+        </div>
+        <div class="foot-col">
+          <h4>Get started</h4>
+          <a href="https://cal.com/jerribland/stryvr">Book a demo</a>
+          <a href="tel:+19843882156">984.388.2156</a>
+          <a href="mailto:hello@getstryvr.com">hello@getstryvr.com</a>
+        </div>
+      </div>
+    </div>
+    <div class="foot-legal">
+      <span>© 2026 Stryvr</span>
+      <span><a href="privacy.html">Privacy</a> · <a href="terms.html">Terms</a></span>
+    </div>
+  </div>
+</footer>
+
+<script>
+  (function () {
+    var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    var els = document.querySelectorAll('.reveal');
+    if (reduce || !('IntersectionObserver' in window)) {
+      els.forEach(function (e) { e.classList.add('in'); });
+      return;
+    }
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (en) {
+        if (en.isIntersecting) { en.target.classList.add('in'); io.unobserve(en.target); }
+      });
+    }, { threshold: 0.14 });
+    els.forEach(function (e) { io.observe(e); });
+  })();
+
+  (function () {
+    var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    var path = document.getElementById('climb');
+    if (!path || reduce) return;
+    var len = path.getTotalLength();
+    path.style.strokeDasharray = len;
+    path.style.strokeDashoffset = len;
+    path.style.transition = 'stroke-dashoffset 1.6s cubic-bezier(.22,.61,.36,1) .2s';
+    requestAnimationFrame(function () {
+      requestAnimationFrame(function () { path.style.strokeDashoffset = '0'; });
+    });
+  })();
+</script>
+</body>
+</html>
